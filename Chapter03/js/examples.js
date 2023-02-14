@@ -129,7 +129,7 @@ function callback(response){
 
 window.onload = jsAjax();
 
-*/
+
 
 //Example 3.1: Viewing fetched data without converting in main.js
 function jsAjax(){
@@ -138,7 +138,50 @@ function jsAjax(){
 };
 
 function callback(response){
-    console.log(response)
+    //console.log(response)
+    //Example 3.1 line 7...
+    console.log(response.json());
 }
+
+window.onload = jsAjax();
+
+*/
+
+//Example 3.3: Correctly accessing the response using a callback() function in main.js
+//Example 3.1...
+//define fetch request
+function jsAjax(){
+    //basic fetch
+    fetch('data/MegaCities.geojson')
+        .then(function(response){
+            return response.json();
+        }) 
+        .then(callback) 
+};
+
+//define callback function
+
+/*
+function callback(response){
+
+    //tasks using the data go here
+    console.log(response)
+
+} */
+
+//Example 3.3 Line 10...
+//define callback function
+function callback(response){
+
+    var myData = response;
+
+    //pass data to another function
+    nextFunction(myData);
+};
+
+function nextFunction(data){
+
+    console.log(data); //contains response data held by myData in callback
+};
 
 window.onload = jsAjax();
